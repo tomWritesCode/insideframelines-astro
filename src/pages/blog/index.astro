@@ -1,0 +1,25 @@
+---
+const blogs = await Astro.glob('./*.mdx')
+const blogPosts = blogs.filter((blogPost) => !blogPost.frontmatter.draft)
+---
+
+<div>
+  <div class="page-container py-12">
+    <h1 class="text-lg font-medium">This is the blog.</h1>
+    <ul class="flex gap-6 mt-8">
+      {
+        blogPosts.map((post) => (
+          <li class="rounded-lg p-6 shadow-md ring-1 ring-black/5">
+            <h2 class="text-lg font-medium">{post.frontmatter.title}</h2>
+            <p class="mt-2">{post.frontmatter.summary}</p>
+            <div class="mt-2">
+              <a href={post.url} class="text-indigo-600 underline">
+                Read more &rarr;
+              </a>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
